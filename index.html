@@ -11802,14 +11802,14 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Contents-of-the-Tutorial">Contents of the Tutorial<a class="anchor-link" href="#Contents-of-the-Tutorial">&#182;</a></h3><p><a href="###Envrioment">Environment</a> <br/>
-<a href="###Data Collection">Data Collection</a><br/>
-<a href="###Data Process">Data Process</a><br/>
-<a href="###Exploratory Analysis">Exploratory Analysis</a><br/>
-<a href="###Machine Learning">Machine Learning</a><br/>
-<a href="###Summary and Insight">Summary and Insights</a><br/>
-<a href="###Documentations">Documentations</a><br/>
-<a href="###References">References</a></p>
+<h3 id="Contents-of-the-Tutorial">Contents of the Tutorial<a class="anchor-link" href="#Contents-of-the-Tutorial">&#182;</a></h3><p><a href="#Envrioment">Environment</a> <br/>
+<a href="#Data-Collection">Data Collection</a><br/>
+<a href="#Data-Process">Data Process</a><br/>
+<a href="#Exploratory-Analysis">Exploratory Analysis</a><br/>
+<a href="#Machine-Learning">Machine Learning</a><br/>
+<a href="#Summary-and-Insight">Summary and Insights</a><br/>
+<a href="#Documentations">Documentations</a><br/>
+<a href="#References">References</a></p>
 
 </div>
 </div>
@@ -11819,9 +11819,33 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Envrioment">Envrioment<a class="anchor-link" href="#Envrioment">&#182;</a></h3>
+<h3 id="Envrioment">Envrioment<a class="anchor-link" href="#Envrioment">&#182;</a></h3><p>This tutorial is</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">dota2api</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span> 
+<span class="kn">import</span> <span class="nn">util22</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -11853,7 +11877,7 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">team_lst</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Alliance&#39;</span><span class="p">,</span><span class="s1">&#39;Newbee&#39;</span><span class="p">,</span><span class="s1">&#39;Team Faceless&#39;</span><span class="p">,</span><span class="s1">&#39;Team Liquid&#39;</span><span class="p">,</span><span class="s1">&#39;TNC Pro Team&#39;</span><span class="p">,</span><span class="s1">&#39;Vega Squadron&#39;</span><span class="p">,</span><span class="s1">&#39;Invictus Gaming&#39;</span><span class="p">,</span><span class="s1">&#39;Team VGJ&#39;</span><span class="p">]</span>
@@ -11869,7 +11893,175 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And then we could download the 8 csv files from <a href="http://datdota.com/">Datdota</a> for each team.(The github repo contains the files I downloaded, since there are ongoing events, records might change anytime.)  Those files will contains all professional matches those 8 teams played with records on Dota2 game server.</p>
+<p>And then we could download the 8 csv files from <a href="http://datdota.com/">Datdota</a> for each team. (The GitHub repo contains the files I downloaded in /dataset, since there are ongoing events, records might change anytime.)  Those files will contain all professional matches those 8 teams played with records on Dota2 game server.
+Load those files as dataframe and then merge them.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the csv files</span>
+<span class="n">ig</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/ig.csv&quot;</span><span class="p">)</span>
+<span class="n">nb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/nb.csv&quot;</span><span class="p">)</span>
+<span class="n">alli</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/Alliance.csv&quot;</span><span class="p">)</span>
+<span class="n">fl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/fl.csv&quot;</span><span class="p">)</span>
+<span class="n">tl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/Team Liquid.csv&quot;</span><span class="p">)</span>
+<span class="n">vs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/Vega Squadron.csv&quot;</span><span class="p">)</span>
+<span class="n">vgj</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/VGJ.csv&quot;</span><span class="p">)</span>
+<span class="n">tnc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset/TNC Pro Team.csv&quot;</span><span class="p">)</span>
+<span class="c1"># merge as one called dataset</span>
+<span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">alli</span><span class="p">,</span><span class="n">nb</span><span class="p">,</span><span class="n">fl</span><span class="p">,</span><span class="n">tl</span><span class="p">,</span><span class="n">tnc</span><span class="p">,</span><span class="n">vs</span><span class="p">,</span><span class="n">ig</span><span class="p">,</span><span class="n">vgj</span><span class="p">]</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">team_lst</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Match</th>
+      <th>Date</th>
+      <th>League</th>
+      <th>Opponent</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">Alliance</th>
+      <th>0</th>
+      <td>3178869138</td>
+      <td>14 May 2017</td>
+      <td>4442</td>
+      <td>Team Empire</td>
+      <td>Loss</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3178589992</td>
+      <td>14 May 2017</td>
+      <td>4442</td>
+      <td>Team Empire</td>
+      <td>Win</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3178374532</td>
+      <td>14 May 2017</td>
+      <td>4442</td>
+      <td>Team Empire</td>
+      <td>Loss</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3176125586</td>
+      <td>13 May 2017</td>
+      <td>4442</td>
+      <td>Natus Vincere</td>
+      <td>Loss</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3175916756</td>
+      <td>13 May 2017</td>
+      <td>4442</td>
+      <td>Natus Vincere</td>
+      <td>Loss</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we have a list of all matches those 8 teams played.  For the goal to perform machine learning on the match data, we need to have more details for each match by get match details through dota2api.</p>
+<p>Note: dota2api requires a special key from Steam.  Follow the tutorial here before the next step: <a href="https://dota2api.readthedocs.io/en/latest/tutorial.html">https://dota2api.readthedocs.io/en/latest/tutorial.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># initialize the dota2api</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">dota2api</span><span class="o">.</span><span class="n">Initialise</span><span class="p">()</span>
+<span class="c1"># get the match details by dota2api and append the raw details as a new column</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># empty list to store the results</span>
+<span class="k">for</span> <span class="n">matchid</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Match&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+    <span class="c1"># get the detail</span>
+    <span class="n">detail</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_match_details</span><span class="p">(</span><span class="n">match_id</span><span class="o">=</span><span class="n">matchid</span><span class="p">)</span>
+    <span class="c1"># add to the result list</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">detail</span><span class="p">)</span>
+    <span class="c1"># the dota2api requires to send no more than 1 request per second.</span>
+    <span class="c1"># please read the docs of dota2api and steam web api for more details.</span>
+    <span class="c1"># due to the request limitation, the code will take a long time.  So save time, you could use</span>
+    <span class="c1"># my dataset &#39;dataset.csv&#39; dumped in my repo or other dumped source.</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#print (len(lst)) # debug code</span>
+    
+    <span class="c1"># this code could be revised to retry the current match while get exception from api server.</span>
+    <span class="c1"># please read http://stackoverflow.com/questions/2083987/how-to-retry-after-exception-in-python for more.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add the details to the dataset as a new column</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Detail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span>
+<span class="c1"># dump the dataset as csv to file</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;dataset.pkl&#39;</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we have all raw data of the match history.  However, before we can do actual analysis on the data, we need to process the data into more readable forms, especially for especially for ‘Detail’ column.</p>
 
 </div>
 </div>
@@ -11879,7 +12071,190 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Data-Process">Data Process<a class="anchor-link" href="#Data-Process">&#182;</a></h3>
+<h3 id="Data-Process">Data Process<a class="anchor-link" href="#Data-Process">&#182;</a></h3><p>We will get features like ‘first blood time’, ‘radiant or dire’ (the position of team in game), etc. And add the patch versions depending on the date of the match.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># change the index of the team into a column</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">index</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># drop the duplicate matches (since a match between 8 teams will be recorded twice in each team&#39;s section).</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Match&#39;</span><span class="p">])</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add versions</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]:</span>
+    <span class="n">ver</span> <span class="o">=</span> <span class="n">util22</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="p">))</span> <span class="c1"># use the function in util.py</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ver</span><span class="p">)</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># parse other features</span>
+<span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dua</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dire</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">radiant</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_GPM</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_GPM</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_XPM</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_XPM</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_kill</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_kill</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_death</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_death</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_assi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_herodmg</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_towerdmg</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_lh</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ra_denies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_herodmg</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_towerdmg</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_lh</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_denies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">di_assi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dlst</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Detail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">teamlst</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Team&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">oppolst</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Opponent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dlst</span><span class="p">):</span>    
+        <span class="n">fb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;first_blood_time&#39;</span><span class="p">])</span>
+        <span class="n">dua</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;duration&#39;</span><span class="p">])</span>
+        
+        <span class="c1"># differ the sides by win/loss </span>
+        <span class="k">try</span><span class="p">:</span>
+            
+            <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Result&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Win&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;radiant_win&#39;</span><span class="p">]:</span>
+                    <span class="n">radiant</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">teamlst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">dire</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">oppolst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">dire</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">teamlst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">radiant</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">oppolst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>   
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;radiant_win&#39;</span><span class="p">]:</span>
+                    <span class="n">dire</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">teamlst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">radiant</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">oppolst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">radiant</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">teamlst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">dire</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">oppolst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">radiant</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="n">dire</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="c1"># add the features of 5 players up to the team&#39;s features</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rgpm</span><span class="p">,</span> <span class="n">rxpm</span><span class="p">,</span><span class="n">rkill</span><span class="p">,</span><span class="n">rdeath</span><span class="p">,</span><span class="n">rlh</span><span class="p">,</span><span class="n">rdines</span><span class="p">,</span><span class="n">rhd</span><span class="p">,</span><span class="n">rtd</span><span class="p">,</span><span class="n">rass</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+        <span class="n">dgpm</span><span class="p">,</span> <span class="n">dxpm</span><span class="p">,</span><span class="n">dkill</span><span class="p">,</span><span class="n">ddeath</span><span class="p">,</span><span class="n">dlh</span><span class="p">,</span><span class="n">ddines</span><span class="p">,</span><span class="n">dhd</span><span class="p">,</span><span class="n">dtd</span><span class="p">,</span><span class="n">dass</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            
+            <span class="n">rgpm</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;gold_per_min&#39;</span><span class="p">]</span>
+            <span class="n">rxpm</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;xp_per_min&#39;</span><span class="p">]</span>
+            <span class="n">rkill</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;kills&#39;</span><span class="p">]</span>
+            <span class="n">rass</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;assists&#39;</span><span class="p">]</span>
+            <span class="n">rlh</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;last_hits&#39;</span><span class="p">]</span>
+            <span class="n">rdines</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;denies&#39;</span><span class="p">]</span>
+            <span class="n">rdeath</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;deaths&#39;</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+           
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">dgpm</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;gold_per_min&#39;</span><span class="p">]</span>
+            <span class="n">dxpm</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;xp_per_min&#39;</span><span class="p">]</span>
+            <span class="n">dkill</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;kills&#39;</span><span class="p">]</span>
+            <span class="n">dass</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;assists&#39;</span><span class="p">]</span>
+            <span class="n">dlh</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;last_hits&#39;</span><span class="p">]</span>
+            <span class="n">ddines</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;denies&#39;</span><span class="p">]</span>
+            <span class="n">ddeath</span> <span class="o">+=</span> <span class="n">dlst</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;players&#39;</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;deaths&#39;</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># add to the lists</span>
+        <span class="n">ra_GPM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rgpm</span><span class="p">)</span>
+        <span class="n">ra_XPM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rxpm</span><span class="p">)</span>
+        <span class="n">ra_kill</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rkill</span><span class="p">)</span>
+        <span class="n">ra_death</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rdeath</span><span class="p">)</span>
+        <span class="n">ra_assi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rass</span><span class="p">)</span>
+        <span class="n">ra_herodmg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rhd</span><span class="p">)</span>
+        <span class="n">ra_towerdmg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rtd</span><span class="p">)</span>
+        <span class="n">ra_lh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rlh</span><span class="p">)</span>
+        <span class="n">ra_denies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rdines</span><span class="p">)</span>
+        <span class="n">di_GPM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dgpm</span><span class="p">)</span>
+        <span class="n">di_XPM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dxpm</span><span class="p">)</span>
+        <span class="n">di_kill</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dkill</span><span class="p">)</span>
+        <span class="n">di_death</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ddeath</span><span class="p">)</span>
+        <span class="n">di_assi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dass</span><span class="p">)</span>
+        <span class="n">di_herodmg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dhd</span><span class="p">)</span>
+        <span class="n">di_towerdmg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dtd</span><span class="p">)</span>
+        <span class="n">di_lh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dlh</span><span class="p">)</span>
+        <span class="n">di_denies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ddines</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># add to dataframe</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_GPM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_GPM</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_XPM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_XPM</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_kill&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_kill</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_death&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_death</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_assistant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_assi</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_last hit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_lh</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Ra_denies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_denies</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_GPM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_GPM</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_XPM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_XPM</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_kill&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_kill</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_death&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_death</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_assistant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_assi</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_last hit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_lh</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Di_denies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">di_denies</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Duration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dua</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;First_blood&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fb</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Radiant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">radiant</span>
+
+<span class="c1"># def a function to transfer win/loss to 1/0</span>
+<span class="k">def</span> <span class="nf">winrate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;Win&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Result&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">winrate</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we have the basic performance data of each team to evalute how well they played in all pro matches.</p>
+
 </div>
 </div>
 </div>
@@ -11888,9 +12263,78 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exploratory-Analysis">Exploratory Analysis<a class="anchor-link" href="#Exploratory-Analysis">&#182;</a></h3>
+<h3 id="Exploratory-Analysis">Exploratory Analysis<a class="anchor-link" href="#Exploratory-Analysis">&#182;</a></h3><p>For eSports, due to the frequent roster changes and patch updates, it is hard to evaluate the performance of a pro team from a historical perspective.  Mostly, a team could only have about 100-200 matches in certain version with a certain roster.  Those changes could make the data from other versions and time periods somehow meaningless and make it difficult to identify the actual factors that influence the team.</p>
+<p>For example, team Alliance got 6 Premier-class champions in 2013 and only 2 in 2014 with a drop in world ranking from No.1 to 20+.  Just by looking at the GPM and XPM, we might say that the players lost their advantage in gaining gold and XP but since the patch in 2014 changed the economy system of the game, even players were doing as well as in 2013, they still could not make the same GPM and XPM.</p>
+<p>Furthermore, the lower winrate means Alliance lost more matches in 2014 than 2013 which would also cause the drop in GPM and XPM – the lost teams typically have deficient performance data. This is the reason why current data analysis for dota2 usually only focus on the recent data of a pro team under current versions and versions without major changes.</p>
+<p>We could group the matches of Alliance to get their average winrate by months.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># copy the dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Alliance&#39;</span><span class="p">]</span>
+<span class="c1"># get the data of the Alliance (differing from its opponent)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;GPM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;XPM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Radiant&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Alliance&#39;</span><span class="p">:</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;GPM&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Ra_GPM&#39;</span><span class="p">]</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;XPM&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Ra_XPM&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;GPM&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Di_GPM&#39;</span><span class="p">]</span>
+        <span class="n">row</span><span class="p">[</span><span class="s1">&#39;XPM&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Di_XPM&#39;</span><span class="p">]</span>        
+<span class="c1"># change the date into month-year</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;%b%Y&#39;</span><span class="p">))</span>
+<span class="c1"># groupby month and take the average</span>
+<span class="n">dfm</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Month&#39;</span><span class="p">],</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># plot the winrate by time</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot_date</span><span class="p">(</span><span class="n">dfm</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">],</span><span class="n">dfm</span><span class="p">[</span><span class="s1">&#39;Result&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Winrate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Figure 1: The winrate of Alliance across time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Just like mentioned before, Alliance had a great winrate at around 2013-08 (nearly 90%) and have a noticiable</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot_date</span><span class="p">(</span><span class="n">dfm</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">],</span><span class="n">dfm</span><span class="p">[</span><span class="s1">&#39;GPM&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot_date</span><span class="p">(</span><span class="n">dfm</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">],</span><span class="n">dfm</span><span class="p">[</span><span class="s1">&#39;XPM&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;GPM/XPM&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Figure 2: The Performance of Alliance across time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -11915,7 +12359,13 @@ We will be able to get various results/hypotheses from this process but to make 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Documentations">Documentations<a class="anchor-link" href="#Documentations">&#182;</a></h3>
+<h3 id="Documentations">Documentations<a class="anchor-link" href="#Documentations">&#182;</a></h3><p>Pandas:<a href="http://pandas.pydata.org/">http://pandas.pydata.org/</a><br/>
+Dota2API:<a href="https://dota2api.readthedocs.io/en/latest/#">https://dota2api.readthedocs.io/en/latest/#</a><br/>
+Numpy:<a href="http://www.numpy.org/">http://www.numpy.org/</a><br/>
+Scikit-learn:<a href="http://scikit-learn.org/stable/">http://scikit-learn.org/stable/</a><br/>
+requests:<a href="http://docs.python-requests.org/en/master/">http://docs.python-requests.org/en/master/</a><br/>
+matplotlib:<a href="https://matplotlib.org/">https://matplotlib.org/</a><br/></p>
+
 </div>
 </div>
 </div>
